@@ -1,0 +1,36 @@
+{% extends 'layout/base.html' %}
+
+{% block title %} Gio hang {% endblock %}
+{% block container %}
+<h1 class="text-center text-danger"> GIO HANG</h1>
+{% if 'cart' in session and session['cart'] %}
+<table class="table">
+    <tr>
+        <th>Ma san pham</th>
+        <th>Ten san pham</th>
+        <th>Don gia</th>
+        <th>So luong</th>
+    </tr>
+    {% for c in session['cart'].values() %}
+    <tr>
+        <td>{{ c.id }}</td>
+        <td>{{ c.name }}</td>
+        <td>{{ c.price }}</td>
+        <td>{{ c.quantity }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<div class="alert alert-info">
+    <h5>Tong san pham: {{ stats.total_quantity }}</h5>
+    <h5>Tong san tien: {{ "{:,.1f}".format(stats.total_amount) }} vnd </h5>
+</div>
+{% if current_user.is_authenticated %}
+<input type="button" value="Thanh toan"  onclick="pay()" class="btn btn-danger"/>
+{% else %}
+<a href="{{ url_for('user_signin', next='cart') }}">Dang nhap de thanh toan</a>
+{% endif %}
+<br><br>
+{% else %}
+<p><i>Khong co san pham nao</i></p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'layout/base.html' %}
+
+{% block title %} Trang Chu {% endblock %}
+{% block container %}
+<h1 class="subject">Chao mung ban den voi Website!!!</h1>
+    {% if pages > 1 %}
+    <ul class="pagination">
+        {% for idx  in range(1, pages+1) %}
+      <li class="page-item"><a class="page-link" href="{{ url_for('home', page=idx ) }}">{{ idx }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% if products %}
+    <div class="row">
+        {% for p in products %}
+        <div class="col-md-3 col-xs-12">
+            <div class="card" style="padding: 5px">
+              <img class="card-img-top" src="{{ url_for('static', filename=p.image) }}" alt="{{ p.name }}">
+              <div class="card-body">
+                <h5 class="card-title">{{ p.name }}</h5>
+                <p class="card-text">{{ "{:,.1f}".format(p.price) }}</p>
+                <a href="#" class="btn btn-primary" onclick="addToCart( {{ p.id }}, '{{ p.name }}', {{ p.price }} )">Dat hang</a>
+              </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+        <p><i>Khong co san pham nao!</i></p>
+    {% endif%}
+
+{% endblock %}
+

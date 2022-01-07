@@ -1,0 +1,24 @@
+* {
+    font-family: Tahoma;
+}
+body{
+    color: darkblue;
+}
+h1.subject {
+    text-align: center;
+}
+img {
+    width: 120px;
+}
+table.product {
+    border-collage: collage;
+    width:100%;
+}
+div.container {
+    width:80%;
+    margin:0 auto;
+}
+.flex{
+    display: flex;
+}
+
